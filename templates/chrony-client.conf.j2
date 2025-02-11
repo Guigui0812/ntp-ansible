@@ -1,0 +1,13 @@
+# NTP client configuration
+
+{% for ntp_server in ntp_servers %}
+server {{ ntp_server }} iburst
+{% endfor %}
+
+logdir {{ ntp_logdir }}
+
+rtcsync
+
+makestep 1 3
+
+driftfile {{ ntp_driftfile }}

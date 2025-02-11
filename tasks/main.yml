@@ -1,0 +1,37 @@
+---
+# tasks file for ntp
+- name: Install chrony package
+  package:
+    name: chrony
+    state: present
+  become: yes
+
+- name: Start chrony service
+  service:
+    name: chronyd
+    state: started
+    enabled: yes
+  become: yes
+
+- name: Configure chrony as NTP client
+  when: ntp_flavor == "client"
+  template:
+    src: templates/chrony-client.conf.j2
+    dest: /etc/chrony/chrony.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  notify: restart chrony
+
+- name: Configure chrony as NTP server
+  when: ntp_flavor == "server"
+  template:
+    src: templates/chrony-server.conf.j2
+    dest: /etc/chrony/chrony.conf
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  notify: restart chrony
+

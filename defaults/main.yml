@@ -1,0 +1,11 @@
+---
+# defaults file for ntp
+ntp_servers: 
+  - time.cloudflare.com
+  - time.google.com
+  - time.facebook.com
+ntp_logdir: /var/log/chrony
+ntp_driftfile: /var/lib/chrony/drift
+ntp_allow_subnets:
+  - 192.168.0.0/24
+ntp_stratum: 10

@@ -1,0 +1,16 @@
+# NTP server configuration
+
+{% for ntp_server in ntp_servers %}
+server {{ ntp_server }} iburst
+{% endfor %}
+
+{% for subnet in ntp_allow_subnets %}
+allow {{ subnet }}
+{% endfor %}
+
+deny all
+
+local stratum {{ ntp_stratum }}
+
+# Restreint l'accès à la commande chronyc à localhost
+bindcmdaddress 127.0.0.1

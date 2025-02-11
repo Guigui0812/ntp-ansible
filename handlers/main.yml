@@ -1,0 +1,7 @@
+---
+# handlers file for ntp
+- name: restart chrony
+  service:
+    name: chronyd
+    state: restarted
+  become: yes
