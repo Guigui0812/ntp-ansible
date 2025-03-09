@@ -10,6 +10,8 @@ allow {{ subnet }}
 
 deny all
 
+makestep 1 3
+
 local stratum {{ ntp_stratum }}
 
 # Restreint l'accès à la commande chronyc à localhost
